@@ -24,14 +24,28 @@ Build a deep learning pipeline that:
 
 ## Dataset
 
-* **Source:** Deep Lake Hub – `activeloop/chest-xray-pneumonia`
-* “The Database for AI by Activeloop.” Activeloop, app.activeloop.ai/activeloop/chest-xray-train/firstdbf9474d461a19e9333c2fd19b46115348f.
+* **Source:** **Dataset source (clickable):**
+🔗 [https://activeloop.ai/datasets/chest-x-ray-pneumonia](https://activeloop.ai/datasets/chest-x-ray-pneumonia)
 * **Modality:** Grayscale chest X-ray images
 * **Labels:** Normal / Pneumonia
 * **Key Challenge:** Multiple images per patient → high risk of leakage if not split correctly
 
 All deep learning experiments use **patient-level splits**, ensuring no individual appears in more than one dataset partition.
 
+### Key Characteristics
+
+* Medical chest X-ray images
+* Multiple images per patient (critical for leakage analysis)
+* Binary classification task:
+
+  * **0** → Normal
+  * **1** → Bacterial Pneumonia
+  * **2** → Viral Pneumonia
+* Loaded programmatically using Deep Lake:
+
+```python
+deeplake.load("hub://activeloop/chest-xray-pneumonia")
+```
 ---
 
 ## Project Structure
@@ -379,6 +393,17 @@ This will:
 * Save a new model artifact to `artifacts/`
 
  **Runtime note:** Expect long runtimes without GPU acceleration.
+ The pretrained model artifact (`artifacts/resnet18_leakfree.pth`) included in this repository was trained using **strict patient-level splits**, as implemented in the notebook **`03_model_without_leakage.ipynb`**. All reported performance metrics and conclusions are based exclusively on this leak-free training pipeline.
+
+The script **`src/train.py`** provides a fully reproducible, end-to-end training pipeline extracted from the notebook for production and experimentation purposes. For simplicity and runtime considerations, the standalone script performs **index-level data splitting** rather than patient-grouped splitting.
+
+This design allows reviewers and users to:
+
+* Reproduce the complete training process end-to-end
+* Verify model architecture, preprocessing steps, and optimization logic
+* Optionally extend or modify the script to reintroduce patient-level grouping if desired
+
+Due to the computational cost of training convolutional neural networks on medical imaging data, pretrained artifacts are provided for convenience. Retraining the model is optional and not required to reproduce inference, API serving, or deployment workflows.
 
 ---
 
@@ -441,7 +466,7 @@ This script:
 
 ---
 
-### 7. Docker Containerization
+###  Docker Containerization
 
 Build the Docker image:
 
@@ -472,7 +497,6 @@ http://localhost:9696
 * Production-ready pipelines require aligned training and inference logic
 
 ---
-
 
 ## Final Notes
 
