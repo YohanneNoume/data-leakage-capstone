@@ -1,0 +1,7 @@
+deeplake==3.9.52
+torch==2.4.1
+torchvision==0.19.1
+flask==3.0.3
+pillow==10.4.0
+scikit-learn==1.5.2
+tqdm==4.66.5
