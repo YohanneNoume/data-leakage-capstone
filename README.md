@@ -166,6 +166,19 @@ This notebook establishes a **fair baseline** using strict patient-level splits.
 
 ---
 
+## Patient-Level 02_leakage_analysis
+
+An analysis was conducted to evaluate the risk of data leakage in the dataset and to quantify how many patients contribute multiple images. Out of **1,636 unique patients**, **1,006 patients** (61.49%) had more than one image.
+
+To assess the impact of naïve image-level splitting, a random image-level partition was applied. Patient identifiers were extracted from both the training and test sets, and overlaps were measured.
+
+* **447 patients** appeared in both training and test sets.
+* This confirms the presence of **patient-level leakage** under naïve image-level splitting.
+
+These results highlight that random image-based partitioning introduces significant leakage, which can invalidate downstream model evaluation. **Patient-level splitting** is necessary to ensure disjoint partitions and reliable performance metrics.
+
+---
+
 ## Hyperparameter Tuning (Leak-Free Baselines)
 
 The two strongest classical baseline models were selected for controlled hyperparameter tuning under strict patient-level (no-leakage) splits:
@@ -488,6 +501,17 @@ http://localhost:9696
 
 ---
 
+
+## Cloud Deployment
+
+The CNN(RESNET) Health API is deployed on **Render** and accessible via the following endpoint:
+
+**Live URL:** [https://data-leakage-capstone.onrender.com/health](https://data-leakage-capstone.onrender.com/health)
+
+<img width="1451" height="384" alt="image" src="https://github.com/user-attachments/assets/c5447989-2182-4856-8cbf-4252eae51068" />
+
+
+---
 ## Key Takeaways
 
 * Patient-level leakage can severely inflate evaluation metrics
