@@ -13,7 +13,8 @@ app = Flask(__name__)
 device = torch.device("cpu")
 model = None
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+# FIXED: Docker absolute path
+BASE_DIR = Path("/app")  
 MODEL_PATH = BASE_DIR / "artifacts" / "resnet18_leakfree.pth"
 
 # Preprocessing (defined once)
@@ -63,4 +64,5 @@ def health():
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 9696))
+    print(f" Server starting on port {port}")
     app.run(host="0.0.0.0", port=port, debug=False)
