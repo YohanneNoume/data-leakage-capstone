@@ -140,7 +140,7 @@ However, this training setup required **~3–4 hours on standard hardware**, and
 
 ---
 
-### 03_model_without_leakage.ipynb — Leak-Free Classical Models
+### 03_model_without_leakage.ipynb - Leak-Free Classical Models
 
 This notebook establishes a **fair baseline** using strict patient-level splits.
 
@@ -166,7 +166,7 @@ This notebook establishes a **fair baseline** using strict patient-level splits.
 
 ---
 
-## Patient-Level 02_leakage_analysis
+## 02_leakage_analysis.ipynb
 
 An analysis was conducted to evaluate the risk of data leakage in the dataset and to quantify how many patients contribute multiple images. Out of **1,636 unique patients**, **1,006 patients** (61.49%) had more than one image.
 
