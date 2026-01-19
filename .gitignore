@@ -1,5 +1,3 @@
 __pycache/ 
 *.pth 
 data/ 
-artifacts/ 
-test_api.py 
