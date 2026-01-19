@@ -25,6 +25,7 @@ Build a deep learning pipeline that:
 ## Dataset
 
 * **Source:** Deep Lake Hub – `activeloop/chest-xray-pneumonia`
+* “The Database for AI by Activeloop.” Activeloop, app.activeloop.ai/activeloop/chest-xray-train/firstdbf9474d461a19e9333c2fd19b46115348f.
 * **Modality:** Grayscale chest X-ray images
 * **Labels:** Normal / Pneumonia
 * **Key Challenge:** Multiple images per patient → high risk of leakage if not split correctly
